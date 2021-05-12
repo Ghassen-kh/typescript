@@ -86,3 +86,15 @@ console.log(result3);
     //- Iterating arrays, objects, & strings
     //- Manipulating & testing values
 
+
+    // Currying : 
+
+    // const wrapInSpan = str => `<span> ${str} </span>`;
+    // const wrapInDivDyn = str => `<div>${str}</div>`;
+ // ==> we can do this : 
+ const wrap = (type, str)=> `<${type}>${str}</${type}>`;
+ const transform4 = pipe(trim,toLowerCase,wrap); // undefined 
+ const result4 = transform4("    AHmed   ");
+console.log(result4);
+
+// ==> that's the purpose of Currying 
