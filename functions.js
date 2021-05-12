@@ -1,3 +1,5 @@
+const { pipe } = require('lodash/fp');
+const compose = require('lodash/fp/compose');
 function sayHello(){
     return "Hello World";
 }
@@ -49,6 +51,38 @@ console.log(output);
 // First we need to trim the input then wrap it inside a div element 
 // Another implementation : 
 
-const trim = z => z.trim();
+const trim = str => str.trim();
 let y = "      ghassen     ";
 console.log(trim(y));
+
+const wrapInDiv = str => "<div>" + str + "</div>";
+let g=wrapInDiv(trim(y));
+console.log(g);
+
+// we can render this dynamically : 
+const wrapInDivDyn = str => `<div>${str}</div>`;
+let h=wrapInDivDyn(trim(y));
+console.log(h);
+
+console.log(wrapInDivDyn(trim("    khalouaoui ")));
+const toLowerCase = str => str.toLowerCase();
+
+ const transform2 = compose(wrapInDivDyn,toLowerCase,trim);
+ const result2 = transform2("    GhassTon   ");
+
+ const transform3 = pipe(trim,toLowerCase,wrapInDivDyn);
+ const result3 = transform3("    AHmed   ");
+
+ const result = wrapInDivDyn(toLowerCase(trim(input))); // => this is what we call function composition in functional programming 
+console.log(result);
+console.log(result2);
+console.log(result3);
+
+/*Use Lodash : Lodash is an open-source JavaScript utility library delivering consistency, modularity, performance, & extras.
+   Lodash helps programmers to write more concise and maintainable JavaScript. */
+   //whenever there are Javascript technologies we can use Lodash
+   //Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc. Lodash library can be broken down into several categories. Lodash’s modular methods are great for:
+    //- Creating composite functions
+    //- Iterating arrays, objects, & strings
+    //- Manipulating & testing values
+
